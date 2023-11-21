@@ -40,11 +40,12 @@ jobs:
           path: |
             ~/.npm
             ~/AppData/Local/npm-cache # Windows cache path
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ matrix.os }}-${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ matrix.os }}-${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ matrix.os }}-${{ runner.os }}-build-
+            ${{ matrix.os }}-${{ runner.os }}-
+
           
       - name: Install Dependencies for SvelteKit-App
         run: |
